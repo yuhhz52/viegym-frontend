@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Calendar, Clock, User, CheckCircle, MessageCircle, Star, Filter, Search, MapPin, ChevronLeft, ChevronRight, Plus } from "lucide-react";
+import { Calendar, Clock, CheckCircle, MessageCircle, Star, Filter, Search, MapPin, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LoadingState from "@/components/LoadingState";
@@ -67,11 +67,12 @@ export default function BookingPage() {
         ]);
         
         // Filter logic: Only COACH cannot book their own slots
-        const filteredSlots = user?.role === 'COACH' 
+        const isCoach = user?.roles?.includes('COACH') ?? false;
+        const filteredSlots = isCoach
           ? slotsData.filter(slot => slot.coachId !== user?.id)
           : slotsData;
         
-        console.log('[Auto-refresh] User:', user?.role, user?.fullName, '| Total:', slotsData.length, '| Filtered:', filteredSlots.length);
+        console.log('[Auto-refresh] User:', user?.roles, user?.fullName, '| Total:', slotsData.length, '| Filtered:', filteredSlots.length);
         console.log('[Auto-refresh] Slots:', filteredSlots.map(s => ({
           coach: s.coachName,
           location: s.location,
@@ -107,7 +108,7 @@ export default function BookingPage() {
       
       console.log('========== BOOKING PAGE DEBUG ==========');
       console.log('[BookingPage] Raw slots from API:', slotsData.length);
-      console.log('[BookingPage] Current user:', { id: user?.id, role: user?.role, name: user?.fullName });
+      console.log('[BookingPage] Current user:', { id: user?.id, roles: user?.roles, name: user?.fullName });
       console.log('[BookingPage] All slots details:', slotsData.map(s => ({
         id: s.id.substring(0, 8),
         coach: s.coachName,
@@ -122,7 +123,8 @@ export default function BookingPage() {
       // Filter logic:
       // - COACH: Cannot book their own slots (filter out)
       // - ADMIN/MEMBER: Can see all slots
-      const filteredSlots = user?.role === 'COACH' 
+      const isCoach = user?.roles?.includes('COACH') ?? false;
+      const filteredSlots = isCoach
         ? slotsData.filter(slot => slot.coachId !== user?.id)
         : slotsData;
       

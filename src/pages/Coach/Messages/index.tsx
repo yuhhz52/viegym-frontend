@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Send, MessageCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import LoadingState from "@/components/LoadingState";
 import { useAuth } from "@/hooks/useAuth";
@@ -48,7 +47,6 @@ export default function CoachMessages() {
         console.log('[Coach] New message received via WebSocket:', message);
         
         // Add client to list if not exists (when user sends first message)
-        const senderId = message.senderId;
         
         // Update conversation list
         setClients(prev => {

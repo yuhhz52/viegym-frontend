@@ -1,6 +1,5 @@
 import { Save, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { UserInfo } from "@/types/auth";
 
 interface ProfileEditModalProps {
   isOpen: boolean;

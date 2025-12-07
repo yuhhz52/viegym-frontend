@@ -6,7 +6,6 @@ import {
   LineChart,
   User,
   Bell,
-  Crown,
   CalendarClock,
 } from "lucide-react"
 import { SidebarLink } from "./SidebarLink"

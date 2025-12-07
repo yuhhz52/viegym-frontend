@@ -17,7 +17,7 @@ import {
 
 export default function AdminLayout() {
   const { user } = useAuth();
-  const { logout, isLoggingOut } = useLogout();
+  const { isLoggingOut } = useLogout();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 

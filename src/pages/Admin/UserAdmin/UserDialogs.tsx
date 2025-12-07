@@ -2,9 +2,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { UserPlus } from "lucide-react";
-import type { UserResponse, UserCreationRequest } from "./type";
+import type { UserCreationRequest } from "./type";
 
 interface UserDialogsProps {
   // Add User Dialog

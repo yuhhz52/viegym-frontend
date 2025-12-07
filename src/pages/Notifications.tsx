@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Bell, Check, X, Award, Settings } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
 import { useNotifications } from '@/hooks/useNotifications';
 import { NotificationType } from '@/api/notificationApi';
 import { useNavigate } from 'react-router-dom';

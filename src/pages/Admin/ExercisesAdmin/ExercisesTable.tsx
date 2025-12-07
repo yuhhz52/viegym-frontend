@@ -18,8 +18,8 @@ interface ExercisesTableProps {
 
 export function ExercisesTable({
   exercises,
-  page,
-  size,
+  page: _page,
+  size: _size,
   selectedExerciseIds,
   onToggleSelection,
   onToggleSelectAll,

@@ -22,6 +22,30 @@ import { Plus } from "lucide-react";
 import { MediaUploader } from "@/components/MediaUploader";
 import type { Exercise, ExerciseMedia } from "./type";
 
+// MediaItem type from MediaUploader (without id)
+interface MediaUploaderItem {
+  url: string;
+  mediaType: string;
+  caption?: string;
+  orderNo: number;
+}
+
+// Helper functions to convert between ExerciseMedia and MediaUploaderItem
+const exerciseMediaToMediaItem = (media: ExerciseMedia): MediaUploaderItem => ({
+  mediaType: media.mediaType,
+  url: media.url,
+  caption: media.caption || '',
+  orderNo: media.orderNo ?? 0,
+});
+
+const mediaItemToExerciseMedia = (item: MediaUploaderItem, existingId?: string): ExerciseMedia => ({
+  id: existingId || '',
+  mediaType: item.mediaType,
+  url: item.url,
+  caption: item.caption,
+  orderNo: item.orderNo,
+});
+
 interface ExerciseFormData {
   name: string;
   description: string;
@@ -162,9 +186,12 @@ export function ExercisesDialogs({
             
             <MediaUploader
               label="Hình ảnh/Video"
-              mediaList={newExercise.mediaList || []}
+              mediaList={(newExercise.mediaList || []).map(exerciseMediaToMediaItem)}
               onMediaChange={(mediaList) =>
-                setNewExercise({ ...newExercise, mediaList })
+                setNewExercise({ 
+                  ...newExercise, 
+                  mediaList: mediaList.map(item => mediaItemToExerciseMedia(item))
+                })
               }
               maxSize={10}
               acceptedTypes={['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'video/mp4']}
@@ -297,9 +324,15 @@ export function ExercisesDialogs({
               
               <MediaUploader
                 label="Hình ảnh/Video"
-                mediaList={editingExercise.mediaList || []}
+                mediaList={(editingExercise.mediaList || []).map(exerciseMediaToMediaItem)}
                 onMediaChange={(mediaList) =>
-                  setEditingExercise({ ...editingExercise, mediaList })
+                  setEditingExercise({ 
+                    ...editingExercise, 
+                    mediaList: mediaList.map((item, idx) => {
+                      const existing = editingExercise.mediaList?.[idx];
+                      return mediaItemToExerciseMedia(item, existing?.id);
+                    })
+                  })
                 }
                 maxSize={10}
                 acceptedTypes={['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'video/mp4']}

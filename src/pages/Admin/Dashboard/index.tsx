@@ -2,18 +2,13 @@ import { useEffect, useState } from 'react';
 import { getDashboardStats, getCommunityPosts } from './api';
 import LoadingState from '@/components/LoadingState';
 import {
-    LineChart,
-    Line,
     AreaChart,
     Area,
-    BarChart,
-    Bar,
     CartesianGrid,
     XAxis,
     YAxis,
     Tooltip,
-    ResponsiveContainer,
-    Legend
+    ResponsiveContainer
 } from 'recharts';
 
 export default function Dashboard() {

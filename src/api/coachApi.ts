@@ -47,7 +47,7 @@ export interface AssignProgramRequest {
  * Get coach statistics and dashboard data
  */
 export const getCoachStatsAPI = async (): Promise<CoachStatsResponse> => {
-  const response = await apiClient.get("/api/coach/stats");
+  const response = await apiClient.get<{ result: CoachStatsResponse }>("/api/coach/stats");
   return response.data.result;
 };
 
@@ -55,7 +55,7 @@ export const getCoachStatsAPI = async (): Promise<CoachStatsResponse> => {
  * Get all clients of the current coach
  */
 export const getMyClientsAPI = async (): Promise<ClientResponse[]> => {
-  const response = await apiClient.get("/api/coach/clients");
+  const response = await apiClient.get<{ result: ClientResponse[] }>("/api/coach/clients");
   return response.data.result;
 };
 
@@ -63,7 +63,7 @@ export const getMyClientsAPI = async (): Promise<ClientResponse[]> => {
  * Get active clients only
  */
 export const getActiveClientsAPI = async (): Promise<ClientResponse[]> => {
-  const response = await apiClient.get("/api/coach/clients/active");
+  const response = await apiClient.get<{ result: ClientResponse[] }>("/api/coach/clients/active");
   return response.data.result;
 };
 
@@ -71,7 +71,7 @@ export const getActiveClientsAPI = async (): Promise<ClientResponse[]> => {
  * Get a specific client by ID
  */
 export const getClientByIdAPI = async (clientId: string): Promise<ClientResponse> => {
-  const response = await apiClient.get(`/api/coach/clients/${clientId}`);
+  const response = await apiClient.get<{ result: ClientResponse }>(`/api/coach/clients/${clientId}`);
   return response.data.result;
 };
 
@@ -79,7 +79,7 @@ export const getClientByIdAPI = async (clientId: string): Promise<ClientResponse
  * Add a new client to the coach's roster
  */
 export const addClientAPI = async (request: AddClientRequest): Promise<ClientResponse> => {
-  const response = await apiClient.post("/api/coach/clients", request);
+  const response = await apiClient.post<{ result: ClientResponse }>("/api/coach/clients", request);
   return response.data.result;
 };
 
@@ -94,7 +94,7 @@ export const removeClientAPI = async (clientId: string): Promise<void> => {
  * Update notes for a specific client
  */
 export const updateClientNotesAPI = async (clientId: string, notes: string): Promise<ClientResponse> => {
-  const response = await apiClient.patch(`/api/coach/clients/${clientId}/notes`, notes, {
+  const response = await apiClient.patch<{ result: ClientResponse }>(`/api/coach/clients/${clientId}/notes`, notes, {
     headers: { "Content-Type": "text/plain" }
   });
   return response.data.result;
@@ -104,7 +104,7 @@ export const updateClientNotesAPI = async (clientId: string, notes: string): Pro
  * Get all programs created by the current coach
  */
 export const getMyProgramsAPI = async (): Promise<any[]> => {
-  const response = await apiClient.get("/api/coach/programs");
+  const response = await apiClient.get<{ result: any[] }>("/api/coach/programs");
   return response.data.result;
 };
 
@@ -119,6 +119,6 @@ export const assignProgramToClientAPI = async (request: AssignProgramRequest): P
  * Get all programs assigned to a specific client
  */
 export const getClientProgramsAPI = async (clientId: string): Promise<any[]> => {
-  const response = await apiClient.get(`/api/coach/clients/${clientId}/programs`);
+  const response = await apiClient.get<{ result: any[] }>(`/api/coach/clients/${clientId}/programs`);
   return response.data.result;
 };

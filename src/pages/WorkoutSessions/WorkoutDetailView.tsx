@@ -116,8 +116,6 @@ export const WorkoutDetailView = ({
         setExerciseTypes(types);
       } catch (err) {
         console.error('Không thể tải tên bài tập:', err);
-      } finally {
-        setLoadingNames(false);
       }
     };
     fetchExerciseNames();

@@ -104,21 +104,6 @@ export default function AccountPage() {
     fetchUser();
   }, [setTheme]);
 
-  const getAvatarUrl = () => {
-    if (previewUrl) return previewUrl;
-    if (user?.avatarUrl) {
-      return user.avatarUrl.startsWith("http")
-        ? user.avatarUrl
-        : `${import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"}/media/${user.avatarUrl}`;
-    }
-    return "";
-  };
-
-  const getInitials = () => {
-    if (user?.fullName) return user.fullName.charAt(0).toUpperCase();
-    if (user?.email) return user.email.charAt(0).toUpperCase();
-    return "U";
-  };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

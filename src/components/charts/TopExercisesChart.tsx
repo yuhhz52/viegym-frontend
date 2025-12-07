@@ -42,7 +42,7 @@ export default function TopExercisesChart({ data }: TopExercisesChartProps) {
           }}
         />
         <Bar dataKey="volume" name="Volume (kg)" radius={[0, 8, 8, 0]}>
-          {data.map((entry, index) => (
+          {data.map((_entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Bar>

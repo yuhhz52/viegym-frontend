@@ -2,18 +2,20 @@ import apiClient from './apiClient';
 
 // ============ NOTIFICATION TYPES ============
 
-export enum NotificationType {
-  ACHIEVEMENT = 'ACHIEVEMENT',
-  WORKOUT = 'WORKOUT',
-  STREAK = 'STREAK',
-  SYSTEM = 'SYSTEM',
-  REMINDER = 'REMINDER',
-  SOCIAL = 'SOCIAL',
-  COACH_MESSAGE = 'COACH_MESSAGE',
-  BOOKING_CONFIRMED = 'BOOKING_CONFIRMED',
-  BOOKING_CANCELLED = 'BOOKING_CANCELLED',
-  PROGRAM_UPDATE = 'PROGRAM_UPDATE'
-}
+export const NotificationType = {
+  ACHIEVEMENT: 'ACHIEVEMENT',
+  WORKOUT: 'WORKOUT',
+  STREAK: 'STREAK',
+  SYSTEM: 'SYSTEM',
+  REMINDER: 'REMINDER',
+  SOCIAL: 'SOCIAL',
+  COACH_MESSAGE: 'COACH_MESSAGE',
+  BOOKING_CONFIRMED: 'BOOKING_CONFIRMED',
+  BOOKING_CANCELLED: 'BOOKING_CANCELLED',
+  PROGRAM_UPDATE: 'PROGRAM_UPDATE'
+} as const;
+
+export type NotificationType = typeof NotificationType[keyof typeof NotificationType];
 
 export interface ApiResponse<T> {
   code?: number;

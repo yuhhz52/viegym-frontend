@@ -1,6 +1,6 @@
-import { Clock, Droplets, Apple, Heart, Save, X } from "lucide-react";
+import React from "react";
+import { Clock, Droplets, Apple, Heart, Save, X, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Edit2 } from "lucide-react";
 import type { UserInfo } from "@/types/auth";
 
 interface DailyGoalsProps {
@@ -19,7 +19,7 @@ interface DailyGoalsProps {
 }
 
 export function DailyGoals({
-  user,
+  user: _user,
   editing,
   goalsData,
   saving,
@@ -67,7 +67,7 @@ export function DailyGoals({
             <input
               type="number"
               value={goalsData.dailyWaterGoal}
-              onChange={(e) => onGoalsChange("dailyWaterGoal", parseInt(e.target.value))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => onGoalsChange("dailyWaterGoal", parseInt(e.target.value) || 0)}
               className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
             />
           </div>
@@ -76,7 +76,7 @@ export function DailyGoals({
             <input
               type="number"
               value={goalsData.dailyCalorieGoal}
-              onChange={(e) => onGoalsChange("dailyCalorieGoal", parseInt(e.target.value))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => onGoalsChange("dailyCalorieGoal", parseInt(e.target.value) || 0)}
               className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
             />
           </div>
@@ -85,7 +85,7 @@ export function DailyGoals({
             <input
               type="number"
               value={goalsData.dailyWorkoutMins}
-              onChange={(e) => onGoalsChange("dailyWorkoutMins", parseInt(e.target.value))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => onGoalsChange("dailyWorkoutMins", parseInt(e.target.value) || 0)}
               className="w-full mt-1 px-3 py-2 border border-slate-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
             />
           </div>

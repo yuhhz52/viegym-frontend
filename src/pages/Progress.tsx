@@ -7,7 +7,6 @@ import { Calendar as CalendarIcon, Target, Dumbbell, Clock, Flame, TrendingUp, A
 import * as workoutApi from '@/pages/WorkoutSessions/api';
 import type { WorkoutSessionResponse, SessionExerciseLogResponse } from '@/pages/WorkoutSessions/type';
 import { Card } from '@/components/ui/card';
-import { useAuth } from '@/hooks/useAuth';
 import LoadingState from '@/components/LoadingState';
 
 interface ProgressStats {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import LoadingState from '@/components/LoadingState';
-import { Users, Calendar, TrendingUp, Activity, UserPlus, BookOpen, CheckCircle, XCircle } from 'lucide-react';
+import { Users, Calendar, TrendingUp, Activity, BookOpen, CheckCircle, XCircle } from 'lucide-react';
 import { getCoachStatsAPI, type CoachStatsResponse } from '@/api/coachApi';
 import { toast } from 'sonner';
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { wsService } from '@/services/websocket';
 import { useAuth } from '@/hooks/useAuth';
 
 interface NotificationManagerProps {
