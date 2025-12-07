@@ -1,5 +1,4 @@
 [build]
-  base = "viegym-frontend"
   publish = "dist"
   command = "npm run build"
 
