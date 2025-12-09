@@ -65,7 +65,6 @@ export default function BookingPage() {
           getAllAvailableSlotsAPI(),
           getMyBookingsAPI(),
         ]);
-        
         // Filter logic: Only COACH cannot book their own slots
         const isCoach = user?.roles?.includes('COACH') ?? false;
         const filteredSlots = isCoach
@@ -85,7 +84,7 @@ export default function BookingPage() {
       } catch (error) {
         console.error('[BookingPage] Auto-refresh failed:', error);
       }
-    }, 10000); // 10 seconds
+    }, 10000); 
 
     return () => clearInterval(interval);
   }, [user?.id]);

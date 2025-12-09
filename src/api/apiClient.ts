@@ -4,7 +4,8 @@ import { API_BASE_URL } from "./constant";
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: { "Content-Type": "application/json" },
-  withCredentials: true, 
+  withCredentials: true,
+  timeout: 10000, // 10 seconds timeout
 });
 
 let isRefreshing = false;
@@ -62,13 +63,14 @@ apiClient.interceptors.response.use(
       console.error('[API Error] Request setup failed:', error.message);
     }
 
-    // Chỉ xử lý 401 và không phải request refresh, logout, hoặc login
+    // Chỉ xử lý 401 và không phải request refresh, logout, login, hoặc my-info (để tránh vòng lặp)
     if (
       error.response?.status === 401 && 
       !originalRequest._retry &&
       !originalRequest.url?.includes("/api/auth/refresh") &&
       !originalRequest.url?.includes("/api/auth/logout") &&
-      !originalRequest.url?.includes("/api/auth/login")
+      !originalRequest.url?.includes("/api/auth/login") &&
+      !originalRequest.url?.includes("/api/user/my-info") // Không refresh cho my-info để tránh vòng lặp
     ) {
       // Nếu đang refresh, thêm request vào queue
       if (isRefreshing) {

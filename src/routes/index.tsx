@@ -43,7 +43,6 @@ const CoachSchedulePage = lazy(() => import("@/pages/Coach/Schedule"));
 const CoachMessagesPage = lazy(() => import("@/pages/Coach/Messages"));
 
 export const router = createBrowserRouter([
-  // --- USER (private)
   {
     path: "/",
     element: (

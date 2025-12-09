@@ -41,7 +41,13 @@ export const fetchCurrentUser = createAsyncThunk<
   try {
     const data = await getMyInfoAPI(); 
     return data;
-  } catch (err) {
+  } catch (err: any) {
+    // Nếu là 401 (Unauthorized), không phải lỗi - user chưa đăng nhập
+    if (err?.response?.status === 401) {
+      return null; // Return null thay vì reject để không hiển thị error
+    }
+    // Các lỗi khác (network, timeout, etc.)
+    console.error("fetchCurrentUser error:", err);
     return rejectWithValue("Không thể lấy thông tin người dùng");
   }
 });
@@ -113,11 +119,17 @@ const authSlice = createSlice({
     builder.addCase(fetchCurrentUser.fulfilled, (state, action: PayloadAction<UserInfo | null>) => {
       state.isLoading = false;
       state.user = action.payload;
+      state.error = null; // Clear error on success
     });
     builder.addCase(fetchCurrentUser.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoading = false; // Đảm bảo luôn set false
       state.user = null;
-      state.error = action.payload ?? "Không thể xác thực người dùng";
+      // Chỉ set error nếu không phải 401 (401 là bình thường khi chưa đăng nhập)
+      if (action.payload && !action.payload.includes("401")) {
+        state.error = action.payload;
+      } else {
+        state.error = null;
+      }
     });
 
     // --- LOGOUT ---

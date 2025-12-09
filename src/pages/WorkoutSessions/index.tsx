@@ -24,9 +24,9 @@ const WorkoutSessionsPage = () => {
   const [activeWorkout, setActiveWorkout] = useState<WorkoutSessionResponse | null>(null);
   const [workoutStartTime, setWorkoutStartTime] = useState<number | null>(null);
   const [isWorkoutPaused, setIsWorkoutPaused] = useState(false);
-  const [pausedTime, setPausedTime] = useState<number>(0); // Total paused duration in seconds
+  const [pausedTime, setPausedTime] = useState<number>(0); 
   const [pauseStartTime, setPauseStartTime] = useState<number | null>(null);
-  const [elapsedTime, setElapsedTime] = useState(0); // in seconds
+  const [elapsedTime, setElapsedTime] = useState(0); 
 
   useEffect(() => {
     fetchSessions();

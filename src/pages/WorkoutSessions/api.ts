@@ -8,12 +8,6 @@ import type {
   WorkoutProgramResponse,
   ExerciseResponse
 } from '@/pages/WorkoutSessions/type';
-
-// ============ WORKOUT SESSIONS ENDPOINTS ============
-
-/**
- * Create a new workout session
- */
 export const createSession = async (
   data: WorkoutSessionRequest
 ): Promise<WorkoutSessionResponse> => {
@@ -27,9 +21,6 @@ export const createSession = async (
   return response.data.result;
 };
 
-/**
- * Get all workout sessions for current user
- */
 export const getAllSessions = async (): Promise<WorkoutSessionResponse[]> => {
   const response = await apiClient.get<ApiResponse<WorkoutSessionResponse[]>>('/api/workouts/sessions');
   return response.data.result;
